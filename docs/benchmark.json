@@ -1,0 +1,189 @@
+{
+  "platform": "Linux-6.18.44-fc-v37-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "numpy": "2.4.4",
+  "image_size": [
+    {
+      "width": 256,
+      "height": 256,
+      "pixels": 65536,
+      "ms_per_megapixel": 135.315,
+      "median_ms": 8.868,
+      "min_ms": 8.742,
+      "max_ms": 8.894
+    },
+    {
+      "width": 512,
+      "height": 512,
+      "pixels": 262144,
+      "ms_per_megapixel": 147.221,
+      "median_ms": 38.593,
+      "min_ms": 37.896,
+      "max_ms": 39.502
+    },
+    {
+      "width": 1024,
+      "height": 1024,
+      "pixels": 1048576,
+      "ms_per_megapixel": 146.349,
+      "median_ms": 153.458,
+      "min_ms": 149.016,
+      "max_ms": 156.884
+    },
+    {
+      "width": 1536,
+      "height": 1536,
+      "pixels": 2359296,
+      "ms_per_megapixel": 232.752,
+      "median_ms": 549.13,
+      "min_ms": 530.15,
+      "max_ms": 576.649
+    },
+    {
+      "width": 2048,
+      "height": 2048,
+      "pixels": 4194304,
+      "ms_per_megapixel": 232.36,
+      "median_ms": 974.587,
+      "min_ms": 818.113,
+      "max_ms": 996.736
+    },
+    {
+      "width": 4000,
+      "height": 3000,
+      "pixels": 12000000,
+      "ms_per_megapixel": 201.015,
+      "median_ms": 2412.185,
+      "min_ms": 2237.913,
+      "max_ms": 2534.095
+    }
+  ],
+  "kernel_size": [
+    {
+      "kernel": 3,
+      "coefficients": 9,
+      "median_ms": 131.165,
+      "min_ms": 125.204,
+      "max_ms": 137.904
+    },
+    {
+      "kernel": 5,
+      "coefficients": 25,
+      "median_ms": 383.349,
+      "min_ms": 379.226,
+      "max_ms": 406.058
+    },
+    {
+      "kernel": 7,
+      "coefficients": 49,
+      "median_ms": 653.359,
+      "min_ms": 624.232,
+      "max_ms": 696.621
+    },
+    {
+      "kernel": 9,
+      "coefficients": 81,
+      "median_ms": 1062.762,
+      "min_ms": 905.198,
+      "max_ms": 1123.569
+    },
+    {
+      "kernel": 11,
+      "coefficients": 121,
+      "median_ms": 1369.723,
+      "min_ms": 1316.605,
+      "max_ms": 1611.817
+    },
+    {
+      "kernel": 15,
+      "coefficients": 225,
+      "median_ms": 2840.104,
+      "min_ms": 2637.026,
+      "max_ms": 3081.665
+    }
+  ],
+  "implementations": [
+    {
+      "side": 64,
+      "pixels": 4096,
+      "fast_ms": 0.339,
+      "naive_ms": 36.707,
+      "speedup": 108.3
+    },
+    {
+      "side": 96,
+      "pixels": 9216,
+      "fast_ms": 0.712,
+      "naive_ms": 78.411,
+      "speedup": 110.1
+    },
+    {
+      "side": 128,
+      "pixels": 16384,
+      "fast_ms": 1.297,
+      "naive_ms": 145.753,
+      "speedup": 112.4
+    },
+    {
+      "side": 160,
+      "pixels": 25600,
+      "fast_ms": 2.342,
+      "naive_ms": 193.069,
+      "speedup": 82.4
+    },
+    {
+      "side": 200,
+      "pixels": 40000,
+      "fast_ms": 3.631,
+      "naive_ms": 364.416,
+      "speedup": 100.4
+    }
+  ],
+  "load": {
+    "iterations": 50,
+    "median_ms": 360.79,
+    "min_ms": 296.0,
+    "max_ms": 405.48,
+    "first_quarter_ms": 379.64,
+    "last_quarter_ms": 358.25,
+    "drift_percent": -5.63,
+    "memory_growth_kb": 1.7
+  },
+  "stress": [
+    {
+      "side": 2000,
+      "megapixels": 4.0,
+      "ms": 1516.6,
+      "estimate_gb": 0.27,
+      "status": "успешно"
+    },
+    {
+      "side": 3000,
+      "megapixels": 9.0,
+      "ms": 3887.5,
+      "estimate_gb": 0.6,
+      "status": "успешно"
+    },
+    {
+      "side": 4000,
+      "megapixels": 16.0,
+      "ms": 8618.3,
+      "estimate_gb": 1.07,
+      "status": "успешно"
+    },
+    {
+      "side": 5000,
+      "megapixels": 25.0,
+      "ms": 13452.7,
+      "estimate_gb": 1.68,
+      "status": "успешно"
+    },
+    {
+      "side": 6000,
+      "megapixels": 36.0,
+      "ms": null,
+      "estimate_gb": 2.42,
+      "status": "отказ: превышен предел памяти"
+    }
+  ]
+}

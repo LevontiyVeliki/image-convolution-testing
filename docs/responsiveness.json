@@ -1,0 +1,30 @@
+[
+  {
+    "pixels": 250000,
+    "size": "500 x 500",
+    "blocked_before_ms": 44.3,
+    "blocked_after_ms": 0.27,
+    "total_ms": 40.5
+  },
+  {
+    "pixels": 1000000,
+    "size": "1000 x 1000",
+    "blocked_before_ms": 166.1,
+    "blocked_after_ms": 4.66,
+    "total_ms": 142.3
+  },
+  {
+    "pixels": 4000000,
+    "size": "2000 x 2000",
+    "blocked_before_ms": 827.4,
+    "blocked_after_ms": 0.35,
+    "total_ms": 779.6
+  },
+  {
+    "pixels": 12000000,
+    "size": "4000 x 3000",
+    "blocked_before_ms": 3043.2,
+    "blocked_after_ms": 0.32,
+    "total_ms": 2944.5
+  }
+]

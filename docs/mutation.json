@@ -1,0 +1,79 @@
+{
+  "total": 12,
+  "killed": 12,
+  "score_percent": 100.0,
+  "mutations": [
+    {
+      "number": 1,
+      "file": "src/imgconv/borders.py",
+      "description": "Отражение границ: строгое сравнение заменено нестрогим",
+      "status": "уничтожена"
+    },
+    {
+      "number": 2,
+      "file": "src/imgconv/borders.py",
+      "description": "Повтор края: выход за верхнюю границу на единицу",
+      "status": "уничтожена"
+    },
+    {
+      "number": 3,
+      "file": "src/imgconv/borders.py",
+      "description": "Отражение границ: изменён период",
+      "status": "уничтожена"
+    },
+    {
+      "number": 4,
+      "file": "src/imgconv/kernel.py",
+      "description": "Проверка ядра: чётность заменена на нечётность",
+      "status": "уничтожена"
+    },
+    {
+      "number": 5,
+      "file": "src/imgconv/kernel.py",
+      "description": "Выбор делителя: единица заменена нулём",
+      "status": "уничтожена"
+    },
+    {
+      "number": 6,
+      "file": "src/imgconv/kernel.py",
+      "description": "Проверка ядра: ослаблено условие квадратности",
+      "status": "уничтожена"
+    },
+    {
+      "number": 7,
+      "file": "src/imgconv/convolution.py",
+      "description": "Отсечение диапазона: верхняя граница сдвинута",
+      "status": "уничтожена"
+    },
+    {
+      "number": 8,
+      "file": "src/imgconv/convolution.py",
+      "description": "Нормализация: сдвиг вычитается вместо сложения",
+      "status": "уничтожена"
+    },
+    {
+      "number": 9,
+      "file": "src/imgconv/convolution.py",
+      "description": "Проверка изображения: разрешено недопустимое число каналов",
+      "status": "уничтожена"
+    },
+    {
+      "number": 10,
+      "file": "src/imgconv/convolution.py",
+      "description": "Цикл свёртки: пропускаются ненулевые коэффициенты",
+      "status": "уничтожена"
+    },
+    {
+      "number": 11,
+      "file": "src/imgconv/convolution.py",
+      "description": "Прозрачность: канал заменён непрозрачным",
+      "status": "уничтожена"
+    },
+    {
+      "number": 12,
+      "file": "src/imgconv/imageio.py",
+      "description": "Чтение файла: прозрачность отбрасывается",
+      "status": "уничтожена"
+    }
+  ]
+}

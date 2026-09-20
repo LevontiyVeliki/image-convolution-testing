@@ -1,0 +1,74 @@
+digraph CFG {
+    graph [rankdir=TB, nodesep=0.45, ranksep=0.42, bgcolor="white",
+           fontname="DejaVu Sans"];
+    node  [fontname="DejaVu Sans", fontsize=11, style=filled];
+    edge  [fontname="DejaVu Sans", fontsize=10, color="#444444"];
+
+    n1  [label="1. Вход\nmap_index(index, length, mode)",
+         shape=ellipse, fillcolor="#F1EFE8"];
+
+    n2  [label="2. length <= 0 ?", shape=diamond, fillcolor="#FAEEDA"];
+    n3  [label="3. raise BorderError\n(неположительный размер)",
+         shape=box, fillcolor="#FCEBEB"];
+
+    n4  [label="4. 0 <= index < length ?", shape=diamond,
+         fillcolor="#FAEEDA"];
+    n5  [label="5. return index", shape=box, fillcolor="#E1F5EE"];
+
+    n6  [label="6. mode is ZERO ?", shape=diamond, fillcolor="#FAEEDA"];
+    n7  [label="7. return None", shape=box, fillcolor="#E1F5EE"];
+
+    n8  [label="8. mode is CLAMP ?", shape=diamond, fillcolor="#FAEEDA"];
+    n9  [label="9. return min(max(index, 0), length - 1)",
+         shape=box, fillcolor="#E1F5EE"];
+
+    n10 [label="10. mode is REFLECT ?", shape=diamond,
+         fillcolor="#FAEEDA"];
+
+    n11 [label="11. length == 1 ?", shape=diamond, fillcolor="#FAEEDA"];
+    n12 [label="12. return 0", shape=box, fillcolor="#E1F5EE"];
+
+    n13 [label="13. period = 2*length - 2\nfolded = abs(index) % period",
+         shape=box, fillcolor="#E6F1FB"];
+    n14 [label="14. folded < length ?", shape=diamond,
+         fillcolor="#FAEEDA"];
+    n15 [label="15. return folded", shape=box, fillcolor="#E1F5EE"];
+    n16 [label="16. return period - folded", shape=box,
+         fillcolor="#E1F5EE"];
+
+    n17 [label="17. raise BorderError\n(режим не поддержан)",
+         shape=box, fillcolor="#FCEBEB"];
+
+    n18 [label="18. Выход", shape=ellipse, fillcolor="#F1EFE8"];
+
+    n1  -> n2;
+    n2  -> n3  [label=" да", color="#A32D2D"];
+    n2  -> n4  [label=" нет"];
+    n3  -> n18 [style=dashed];
+
+    n4  -> n5  [label=" да", color="#0F6E56"];
+    n4  -> n6  [label=" нет"];
+    n5  -> n18 [style=dashed];
+
+    n6  -> n7  [label=" да", color="#0F6E56"];
+    n6  -> n8  [label=" нет"];
+    n7  -> n18 [style=dashed];
+
+    n8  -> n9  [label=" да", color="#0F6E56"];
+    n8  -> n10 [label=" нет"];
+    n9  -> n18 [style=dashed];
+
+    n10 -> n11 [label=" да", color="#0F6E56"];
+    n10 -> n17 [label=" нет", color="#A32D2D"];
+
+    n11 -> n12 [label=" да", color="#0F6E56"];
+    n11 -> n13 [label=" нет"];
+    n12 -> n18 [style=dashed];
+
+    n13 -> n14;
+    n14 -> n15 [label=" да", color="#0F6E56"];
+    n14 -> n16 [label=" нет", color="#0F6E56"];
+    n15 -> n18 [style=dashed];
+    n16 -> n18 [style=dashed];
+    n17 -> n18 [style=dashed];
+}

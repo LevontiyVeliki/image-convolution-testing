@@ -1,0 +1,26 @@
+digraph States {
+    graph [rankdir=TB, nodesep=0.55, ranksep=0.7, bgcolor="white",
+           fontname="DejaVu Sans"];
+    node  [shape=box, style="rounded,filled", fontname="DejaVu Sans",
+           fontsize=12, margin="0.28,0.16"];
+    edge  [fontname="DejaVu Sans", fontsize=10, color="#444444"];
+
+    start [shape=circle, label="", width=0.22, style=filled,
+           fillcolor="#333333"];
+
+    empty  [label="Пусто\nизображение не открыто", fillcolor="#F1EFE8"];
+    loaded [label="Загружено\nрезультата ещё нет", fillcolor="#E6F1FB"];
+    busy   [label="Обработка\nвсе кнопки заблокированы", fillcolor="#FAEEDA"];
+    ready  [label="Готово\nрезультат получен", fillcolor="#E1F5EE"];
+
+    start  -> empty;
+    empty  -> empty  [label="  ошибка чтения"];
+    empty  -> loaded [label="  открыть файл"];
+    loaded -> loaded [label="  открыть другой файл"];
+    loaded -> busy   [label="  применить"];
+    busy   -> loaded [label="  ошибка обработки", constraint=false];
+    busy   -> ready  [label="  успех"];
+    ready  -> ready  [label="  сохранить"];
+    ready  -> busy   [label="  применить снова", constraint=false];
+    ready  -> loaded [label="  сбросить или открыть другой файл"];
+}

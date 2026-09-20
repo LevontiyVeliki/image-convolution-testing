@@ -1,0 +1,81 @@
+digraph ClassDiagram {
+    graph [rankdir=TB, splines=polyline, nodesep=0.6, ranksep=0.9,
+           bgcolor="white", fontname="DejaVu Sans"];
+    node  [shape=plaintext, fontname="DejaVu Sans", fontsize=11];
+    edge  [fontname="DejaVu Sans", fontsize=10, color="#444444"];
+
+    Kernel [label=<
+      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+        <TR><TD BGCOLOR="#E1F5EE"><B>Kernel</B></TD></TR>
+        <TR><TD ALIGN="LEFT">- _values : ndarray<BR ALIGN="LEFT"/>- _divisor : float<BR ALIGN="LEFT"/>- _offset : float<BR ALIGN="LEFT"/>- _name : str<BR ALIGN="LEFT"/></TD></TR>
+        <TR><TD ALIGN="LEFT">+ values : ndarray<BR ALIGN="LEFT"/>+ size : int<BR ALIGN="LEFT"/>+ radius : int<BR ALIGN="LEFT"/>+ divisor : float<BR ALIGN="LEFT"/>+ offset : float<BR ALIGN="LEFT"/>+ is_normalized : bool<BR ALIGN="LEFT"/>- _to_matrix(values)<BR ALIGN="LEFT"/>- _validate_shape(matrix)<BR ALIGN="LEFT"/>- _resolve_divisor(matrix, divisor)<BR ALIGN="LEFT"/></TD></TR>
+      </TABLE>>];
+
+    KernelError [label=<
+      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+        <TR><TD BGCOLOR="#FCEBEB"><B>&lt;&lt;exception&gt;&gt;<BR/>KernelError</B></TD></TR>
+      </TABLE>>];
+
+    ImageError [label=<
+      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+        <TR><TD BGCOLOR="#FCEBEB"><B>&lt;&lt;exception&gt;&gt;<BR/>ImageError</B></TD></TR>
+      </TABLE>>];
+
+    BorderError [label=<
+      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+        <TR><TD BGCOLOR="#FCEBEB"><B>&lt;&lt;exception&gt;&gt;<BR/>BorderError</B></TD></TR>
+      </TABLE>>];
+
+    BorderMode [label=<
+      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+        <TR><TD BGCOLOR="#FAEEDA"><B>&lt;&lt;enumeration&gt;&gt;<BR/>BorderMode</B></TD></TR>
+        <TR><TD ALIGN="LEFT">ZERO<BR ALIGN="LEFT"/>CLAMP<BR ALIGN="LEFT"/>REFLECT<BR ALIGN="LEFT"/></TD></TR>
+        <TR><TD ALIGN="LEFT">+ title : str<BR ALIGN="LEFT"/></TD></TR>
+      </TABLE>>];
+
+    Borders [label=<
+      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+        <TR><TD BGCOLOR="#EEEDFE"><B>&lt;&lt;module&gt;&gt;<BR/>borders</B></TD></TR>
+        <TR><TD ALIGN="LEFT">+ mode_titles() : list<BR ALIGN="LEFT"/>+ mode_by_title(title) : BorderMode<BR ALIGN="LEFT"/>+ map_index(index, length, mode) : int<BR ALIGN="LEFT"/></TD></TR>
+      </TABLE>>];
+
+    Convolution [label=<
+      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+        <TR><TD BGCOLOR="#EEEDFE"><B>&lt;&lt;module&gt;&gt;<BR/>convolution</B></TD></TR>
+        <TR><TD ALIGN="LEFT">+ validate_image(image) : ndarray<BR ALIGN="LEFT"/>+ convolve_naive(image, kernel, border)<BR ALIGN="LEFT"/>+ convolve_fast(image, kernel, border)<BR ALIGN="LEFT"/>+ convolve(image, kernel, border, use_fast)<BR ALIGN="LEFT"/>- _border_indices(length, radius, border)<BR ALIGN="LEFT"/>- _finalize(accumulator, kernel, squeeze)<BR ALIGN="LEFT"/></TD></TR>
+      </TABLE>>];
+
+    ImageIO [label=<
+      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+        <TR><TD BGCOLOR="#EEEDFE"><B>&lt;&lt;module&gt;&gt;<BR/>imageio</B></TD></TR>
+        <TR><TD ALIGN="LEFT">+ load_image(path) : ndarray<BR ALIGN="LEFT"/>+ save_image(path, array)<BR ALIGN="LEFT"/></TD></TR>
+      </TABLE>>];
+
+    ConvolutionWorker [label=<
+      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+        <TR><TD BGCOLOR="#E6F1FB"><B>ConvolutionWorker</B><BR/><I>QThread</I></TD></TR>
+        <TR><TD ALIGN="LEFT">- _image : ndarray<BR ALIGN="LEFT"/>- _kernel : Kernel<BR ALIGN="LEFT"/>- _border : BorderMode<BR ALIGN="LEFT"/></TD></TR>
+        <TR><TD ALIGN="LEFT">+ succeeded : Signal<BR ALIGN="LEFT"/>+ failed : Signal<BR ALIGN="LEFT"/>+ run()<BR ALIGN="LEFT"/></TD></TR>
+      </TABLE>>];
+
+    MainWindow [label=<
+      <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+        <TR><TD BGCOLOR="#E6F1FB"><B>MainWindow</B></TD></TR>
+        <TR><TD ALIGN="LEFT">- _source : ndarray<BR ALIGN="LEFT"/>- _result : ndarray<BR ALIGN="LEFT"/>- _last_duration_ms : float<BR ALIGN="LEFT"/>- _last_error : str<BR ALIGN="LEFT"/></TD></TR>
+        <TR><TD ALIGN="LEFT">+ processing_finished : Signal<BR ALIGN="LEFT"/>+ is_busy : bool<BR ALIGN="LEFT"/>+ load_array(array)<BR ALIGN="LEFT"/>+ open_path(path) : bool<BR ALIGN="LEFT"/>+ save_path(path) : bool<BR ALIGN="LEFT"/>+ on_apply_clicked() : bool<BR ALIGN="LEFT"/>+ show_warning(title, message)<BR ALIGN="LEFT"/>- _on_worker_succeeded(result)<BR ALIGN="LEFT"/>- _on_worker_failed(message)<BR ALIGN="LEFT"/></TD></TR>
+      </TABLE>>];
+
+    edge [arrowhead=onormal, style=solid, color="#A32D2D"];
+    Kernel      -> KernelError  [label=" выбрасывает", arrowhead=vee, style=dashed];
+    Convolution -> ImageError   [label=" выбрасывает", arrowhead=vee, style=dashed];
+    Borders     -> BorderError  [label=" выбрасывает", arrowhead=vee, style=dashed];
+
+    edge [arrowhead=vee, style=dashed, color="#444444"];
+    Convolution -> Kernel      [label=" использует"];
+    Convolution -> Borders     [label=" использует"];
+    Borders     -> BorderMode  [label=" определяет"];
+    MainWindow  -> ConvolutionWorker [label=" запускает"];
+    ConvolutionWorker -> Convolution [label=" вызывает"];
+    MainWindow  -> ImageIO     [label=" вызывает"];
+    MainWindow  -> Kernel      [label=" выбирает фильтр"];
+}
